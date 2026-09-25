@@ -1,0 +1,30 @@
+body {
+  font-family: sans-serif;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+#login-panel, #user-info, #lots-panel, #admin-panel {
+  margin-bottom: 20px;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+input, button {
+  padding: 8px;
+  margin: 4px;
+}
+
+li {
+  margin-bottom: 8px;
+}
+
+.closed {
+  color: red;
+}
+
+.open {
+  color: green;
+}
