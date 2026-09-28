@@ -11,6 +11,29 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U parkingadmin -d parkingapp"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+  api:
+    build: ./backend
+    container_name: parking-api
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_USER: parkingadmin
+      DB_PASSWORD: parkingPass2026
+      DB_NAME: parkingapp
+      DB_HOST: db
+      DB_PORT: 5432
+      JWT_SECRET: ${JWT_SECRET:-change-me-dev-secret}
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/frontend:ro
 
 volumes:
   pgdata:
