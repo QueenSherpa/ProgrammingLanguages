@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calorie Counter · Today</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/dashboard"><span class="brand-mark" aria-hidden="true"></span><span data-app-name>Calorie Counter</span></a>
+    <nav>
+      <a id="admin-link" class="btn ghost" href="/admin" hidden>Admin</a>
+      <span id="current-user" class="muted"></span>
+      <button id="logout" class="btn ghost" type="button">Log out</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="day-nav">
+      <button class="btn ghost icon" id="prev-day" type="button" aria-label="Previous day">‹</button>
+      <div class="day-label">
+        <h2 id="day-title">Today</h2>
+        <input type="date" id="day-picker" aria-label="Pick a date">
+      </div>
+      <button class="btn ghost icon" id="next-day" type="button" aria-label="Next day">›</button>
+    </section>
+
+    <div class="grid">
+      <section class="card summary-card">
+        <div class="ring" id="ring">
+          <svg viewBox="0 0 120 120" aria-hidden="true">
+            <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+            <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="ring-text">
+            <strong id="total">0</strong>
+            <span class="muted">of <span id="goal">2000</span> kcal</span>
+          </div>
+        </div>
+        <p id="remaining" class="remaining"></p>
+        <form id="goal-form" class="inline-form">
+          <label>Daily goal
+            <input type="number" name="daily_goal" min="500" max="10000" step="50" required>
+          </label>
+          <button class="btn" type="submit">Save</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h3 id="form-title">Add food</h3>
+        <form id="entry-form" class="entry-form">
+          <label class="span-2">Food
+            <input name="food" maxlength="120" required placeholder="e.g. Greek yogurt">
+          </label>
+          <label>Calories
+            <input name="calories" type="number" min="0" max="20000" step="1" required>
+          </label>
+          <label>Meal
+            <select name="meal">
+              <option value="breakfast">Breakfast</option>
+              <option value="lunch">Lunch</option>
+              <option value="dinner">Dinner</option>
+              <option value="snack" selected>Snack</option>
+            </select>
+          </label>
+          <p id="entry-message" class="message span-2" hidden></p>
+          <div class="span-2 form-actions">
+            <button class="btn primary" type="submit" id="entry-submit">Add</button>
+            <button class="btn ghost" type="button" id="entry-cancel" hidden>Cancel</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <section class="card">
+      <h3>Food log</h3>
+      <div id="meals"></div>
+    </section>
+
+    <section class="card">
+      <h3>Last 7 days</h3>
+      <div class="bars" id="week"></div>
+    </section>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/charts.js"></script>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

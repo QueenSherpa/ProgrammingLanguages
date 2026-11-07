@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calorie Counter · Admin</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/admin"><span class="brand-mark" aria-hidden="true"></span><span data-app-name>Calorie Counter</span> <span class="badge">Admin</span></a>
+    <nav>
+      <a class="btn ghost" href="/dashboard">My log</a>
+      <span id="current-user" class="muted"></span>
+      <button id="logout" class="btn ghost" type="button">Log out</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div class="tabs page-tabs" role="tablist">
+      <button type="button" class="tab active" data-panel="users-panel">Users</button>
+      <button type="button" class="tab" data-panel="theme-panel">Appearance</button>
+    </div>
+
+    <section id="users-panel" class="panel">
+      <div class="stats" id="stats"></div>
+      <section class="card">
+        <div class="card-head">
+          <h3>All users</h3>
+          <input type="search" id="user-search" placeholder="Search users" aria-label="Search users">
+        </div>
+        <div class="table-wrap">
+          <table class="users-table">
+            <thead>
+              <tr><th>User</th><th>Role</th><th>Goal</th><th>Today</th><th>Entries</th><th>Last entry</th><th>Joined</th><th></th></tr>
+            </thead>
+            <tbody id="users-body"></tbody>
+          </table>
+        </div>
+        <p id="users-message" class="message" hidden></p>
+      </section>
+
+      <section class="card" id="user-detail" hidden>
+        <div class="card-head">
+          <h3 id="detail-title">User</h3>
+          <button class="btn ghost" type="button" id="detail-close">Close</button>
+        </div>
+        <section class="day-nav compact">
+          <button class="btn ghost icon" id="detail-prev" type="button" aria-label="Previous day">‹</button>
+          <div class="day-label">
+            <h4 id="detail-day"></h4>
+            <input type="date" id="detail-picker" aria-label="Pick a date">
+          </div>
+          <button class="btn ghost icon" id="detail-next" type="button" aria-label="Next day">›</button>
+        </section>
+        <div class="grid">
+          <div class="summary-card">
+            <div class="ring">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <circle class="ring-track" cx="60" cy="60" r="52"></circle>
+                <circle class="ring-fill" id="ring-fill" cx="60" cy="60" r="52"></circle>
+              </svg>
+              <div class="ring-text">
+                <strong id="total">0</strong>
+                <span class="muted">of <span id="goal">2000</span> kcal</span>
+              </div>
+            </div>
+            <p id="remaining" class="remaining"></p>
+            <form id="detail-goal-form" class="inline-form">
+              <label>Daily goal
+                <input type="number" name="daily_goal" min="500" max="10000" step="50" required>
+              </label>
+              <button class="btn" type="submit">Save</button>
+            </form>
+          </div>
+          <div>
+            <h4>Food log</h4>
+            <div id="detail-meals"></div>
+          </div>
+        </div>
+        <h4>Last 14 days</h4>
+        <div class="bars" id="detail-bars"></div>
+      </section>
+    </section>
+
+    <section id="theme-panel" class="panel" hidden>
+      <div class="grid">
+        <section class="card">
+          <h3>Appearance</h3>
+          <p class="muted">Changes preview instantly and apply to every user once saved.</p>
+          <form id="theme-form" class="theme-form">
+            <label class="span-2">App name
+              <input name="appName" maxlength="40" required>
+            </label>
+            <label>Primary <input type="color" name="primary"></label>
+            <label>Accent <input type="color" name="accent"></label>
+            <label>Background <input type="color" name="background"></label>
+            <label>Cards <input type="color" name="surface"></label>
+            <label>Text <input type="color" name="text"></label>
+            <label>Font
+              <select name="font">
+                <option value="system">System</option>
+                <option value="serif">Serif</option>
+                <option value="rounded">Rounded</option>
+                <option value="mono">Monospace</option>
+              </select>
+            </label>
+            <label class="span-2">Corner radius <output id="radius-out"></output>
+              <input type="range" name="radius" min="0" max="24" step="1">
+            </label>
+            <p id="theme-message" class="message span-2" hidden></p>
+            <div class="span-2 form-actions">
+              <button class="btn primary" type="submit">Save theme</button>
+              <button class="btn ghost" type="button" id="theme-revert">Discard changes</button>
+              <button class="btn ghost danger" type="button" id="theme-reset">Restore defaults</button>
+            </div>
+          </form>
+        </section>
+        <section class="card preview">
+          <h3>Preview</h3>
+          <div class="preview-box">
+            <p><strong data-app-name>Calorie Counter</strong></p>
+            <p class="muted">Muted helper text</p>
+            <div class="preview-bar"><span></span></div>
+            <div class="form-actions">
+              <button class="btn primary" type="button">Primary</button>
+              <button class="btn" type="button">Secondary</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/charts.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>
