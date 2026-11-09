@@ -39,10 +39,10 @@ describe('auth', () => {
   });
 
   test('login succeeds with correct password and fails otherwise', async () => {
-    await register('bob', 'correct-horse');
+    await register('bob', 'correct-horse42');
     const ok = await request(app)
       .post('/api/auth/login')
-      .send({ username: 'bob', password: 'correct-horse' });
+      .send({ username: 'bob', password: 'correct-horse42' });
     expect(ok.status).toBe(200);
     expect(ok.body.token).toBeTruthy();
 
